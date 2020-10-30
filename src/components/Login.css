@@ -1,0 +1,17 @@
+.login_form {
+    display: flex;
+    flex-direction: column;
+    height: 70vh;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .login_form form {
+      box-shadow: 3px 4px 15px -4px rgba(0,0,0,0.75);
+      width: 50%;
+      padding: 20px;
+      border-radius: 3px;
+      background-color: #e98074;
+      color: whitesmoke
+  }
+  

@@ -1,0 +1,10 @@
+.navFont > ul{
+  font-size: large;
+}
+
+.navFont > ul .nav-link:hover {
+  font-weight: bold;
+  color: #e85a4f
+}
+
+
