@@ -143,8 +143,8 @@ function HomeLeft() {
               placeholder="State"
               onChange={onChange}
             >
-              <option value="new">New</option>
-              <option value="used">Used</option>
+              <option value="New">New</option>
+              <option value="Used">Used</option>
             </select>
           </div>
           <div className="form-group">

@@ -1,18 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import axios from "axios";
+import EditModal from "./modals/EditModal";
 
 function HomeRightCard({ cars }) {
-
+  const [price, setPrice] = useState("");
+  const [id, setId] = useState("");
+  //Handle delete button
   const deleteAd = (id) => {
     axios
       .delete(`/car/${id}`)
       .then((res) => {
         console.log(res.data._id);
-        console.log(`item: ${res.data._id} deleted`)
+        console.log(`item: ${res.data._id} deleted`);
       })
       .catch((err) => {
         console.log(err);
       });
+  };
+  //get price
+  const getPrice = (price, id) => {
+    if (price) {
+      setPrice(price);
+    }
+
+    if (id) {
+      setId(id);
+    }
   };
 
   const loadCars = (cars) => {
@@ -29,36 +42,52 @@ function HomeRightCard({ cars }) {
                       &#8358; <span className="text-success">{item.price}</span>
                     </td>
                     <td>
-                      <i className="fas fa-car"></i> {item.model}
+                      <i className="fas fa-car"></i> {item.manufacturer}
                     </td>
-                    <td>Body_Type: {item.body_type}</td>
+                    <td>Model: {item.model}</td>
                   </tr>
 
                   <tr>
+                    <td>Body_Type: {item.body_type}</td>
                     <td>State: {item.state}</td>
-                    <td>
-                      Status:{item._id}{" "}
-                      <span className="text-success">{item.status}</span>
-                    </td>
+                    <td>Status: {item.status}</td>
+                  </tr>
+
+                  <tr>
                     <td>
                       <button
                         type="button"
                         className="btn btn-outline-warning btn-sm"
+                        data-toggle="modal"
+                        data-target="#editModal"
+                        onClick={() => getPrice(item.price, item._id)}
                       >
-                        <i className="far fa-edit"></i>
+                        Edit Price
+                        <i
+                          className="far fa-edit"
+                          style={{ marginLeft: "5px" }}
+                        ></i>
                       </button>
+                    </td>
+                    <td>
                       <button
                         type="button"
                         className="btn btn-outline-success btn-sm"
                       >
-                        Sold
+                        Mark as Sold
                       </button>
+                    </td>
+                    <td>
                       <button
                         type="button"
                         className="btn btn-outline-danger btn-sm"
                         onClick={() => deleteAd(item._id)}
                       >
-                        <i className="far fa-trash-alt"></i>
+                        Delete Ad
+                        <i
+                          className="far fa-trash-alt"
+                          style={{ marginLeft: "5px" }}
+                        ></i>
                       </button>
                     </td>
                   </tr>
@@ -73,6 +102,7 @@ function HomeRightCard({ cars }) {
 
   return (
     <div>
+      <EditModal price={price} id={id} />
       <div className="card">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/0/02/Jaguar_XJR_Sonderedition_front_20080811.jpg"
