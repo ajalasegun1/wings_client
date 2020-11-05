@@ -1,6 +1,20 @@
 import React from "react";
+import axios from "axios";
 
 function HomeRightCard({ cars }) {
+
+  const deleteAd = (id) => {
+    axios
+      .delete(`/car/${id}`)
+      .then((res) => {
+        console.log(res.data._id);
+        console.log(`item: ${res.data._id} deleted`)
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   const loadCars = (cars) => {
     if (cars) {
       return cars.map((item) => {
@@ -23,7 +37,7 @@ function HomeRightCard({ cars }) {
                   <tr>
                     <td>State: {item.state}</td>
                     <td>
-                      Status:{" "}
+                      Status:{item._id}{" "}
                       <span className="text-success">{item.status}</span>
                     </td>
                     <td>
@@ -42,6 +56,7 @@ function HomeRightCard({ cars }) {
                       <button
                         type="button"
                         className="btn btn-outline-danger btn-sm"
+                        onClick={() => deleteAd(item._id)}
                       >
                         <i className="far fa-trash-alt"></i>
                       </button>

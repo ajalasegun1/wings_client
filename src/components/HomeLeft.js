@@ -51,7 +51,6 @@ function HomeLeft() {
   const onPriceChange = (e) => {
     let price = e.target.value;
     price = Number(price);
-    console.log({ [e.target.name]: e.target.value });
     if (isNaN(price)) {
       setFormErrors({ ...formErrors, priceError: "Enter a valid price" });
     } else {
@@ -76,7 +75,7 @@ function HomeLeft() {
       setFormErrors({ ...formErrors, imageError: "Please select an image" });
       return;
     } else {
-      console.log(post)
+      console.log(post);
       axios
         .post("/car", post)
         .then((res) => console.log(res.data))
