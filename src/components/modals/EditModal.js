@@ -60,7 +60,7 @@ function EditModal({ price, id }) {
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="editModalLabel">
-              Edit Price {id}
+              Edit Price 
             </h5>
             <button
               type="button"

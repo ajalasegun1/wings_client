@@ -46,3 +46,16 @@ td {
 div.card{
     margin-bottom: 10px;
 }
+
+/*flag color */
+.flag-color {
+  color: red;
+}
+
+.flag-color:hover {
+  cursor: pointer;
+}
+
+.pill-button:hover {
+  cursor: pointer;
+}

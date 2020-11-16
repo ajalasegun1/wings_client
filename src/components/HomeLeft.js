@@ -104,7 +104,7 @@ function HomeLeft() {
             <input
               type="text"
               className="form-control form-control-sm"
-              id=""
+              id="manufacturerId"
               placeholder="Manufacturer"
               aria-describedby="emailHelp"
               required
@@ -116,7 +116,7 @@ function HomeLeft() {
             <input
               type="text"
               className="form-control form-control-sm"
-              id=""
+              id="modelid"
               placeholder="Model"
               required
               name="model"
@@ -127,7 +127,7 @@ function HomeLeft() {
             <input
               type="text"
               className="form-control form-control-sm"
-              id=""
+              id="bodytypeid"
               placeholder="Body Type"
               required
               name="body_type"
@@ -151,7 +151,7 @@ function HomeLeft() {
             <input
               type="text"
               className="form-control form-control-sm"
-              id=""
+              id="priceid"
               placeholder="Price"
               required
               name="price"

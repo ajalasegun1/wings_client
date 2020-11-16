@@ -1,10 +1,23 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EditModal from "./modals/EditModal";
+import Flag from "./Flag";
+import FlagModal from "./modals/FlagModal";
+import FlagCountModal from "./modals/FlagCountModal";
 
 function HomeRightCard({ cars }) {
   const [price, setPrice] = useState("");
   const [id, setId] = useState("");
+  const [adId, setAdId] = useState("");
+  const [flags, setFlags] = useState([]);
+
+  useEffect(() => {
+    axios.get("/flag").then((res) => {
+      console.log(res.data);
+      setFlags(res.data);
+    });
+  }, [cars]);
+
   //Handle delete button
   const deleteAd = (id) => {
     axios
@@ -28,6 +41,19 @@ function HomeRightCard({ cars }) {
     }
   };
 
+  //get adID
+  const getAdId = (id) => {
+    setAdId(id);
+  };
+
+  //getFlags
+  const getFlags = (data) => {
+    //setFlags(data);
+  };
+
+  //display flags
+  
+  //display cars
   const loadCars = (cars) => {
     if (cars) {
       return cars.map((item) => {
@@ -90,6 +116,30 @@ function HomeRightCard({ cars }) {
                         ></i>
                       </button>
                     </td>
+                    <td>
+                      <Flag
+                        ad_id={item._id}
+                        getAdId={getAdId}
+                        getFlags={getFlags}
+                      />
+                      <i
+                        className="fas fa-flag flag-color"
+                        data-toggle="modal"
+                        data-target="#flagModal"
+                        onClick={() => {
+                          setAdId(item._id);
+                        }}
+                      ></i>{" "}
+                      <span className="badge badge-pill badge-primary pill-button" >
+                        {
+                          flags.filter((flag) => {
+                            return flag.car_id === item._id;
+                          }).length
+                        }
+                      </span>
+                    </td>
+                  </tr>
+                  <tr>
                   </tr>
                 </tbody>
               </table>
@@ -103,6 +153,8 @@ function HomeRightCard({ cars }) {
   return (
     <div>
       <EditModal price={price} id={id} />
+      <FlagModal adId={adId} />
+      <FlagCountModal flags={flags} adId={adId} />
       <div className="card">
         <img
           src="https://upload.wikimedia.org/wikipedia/commons/0/02/Jaguar_XJR_Sonderedition_front_20080811.jpg"
