@@ -1,21 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-function FlagCountModal({ flags, adId }) {
-  const [reports, setReports] = useState(null);
-  const [data, setData] = useState(null);
-
-  useEffect(() => {
-    if (flags) {
-      setReports(flags);
-    }
-  }, [flags]);
-
-  useEffect(() => {
-    if (reports) {
-      setData(reports.filter((item) => item.car_id === adId));
-    }
-  }, [reports, adId]);
-
+function FlagCountModal({ displayReport }) {
   return (
     <div
       className="modal fade"
@@ -24,7 +9,7 @@ function FlagCountModal({ flags, adId }) {
       aria-labelledby="flagCountModalLabel"
       aria-hidden="true"
     >
-      <div className="modal-dialog">
+      <div className="modal-dialog .modal-dialog-scrollable">
         <div className="modal-content">
           <div className="modal-header">
             <h5 className="modal-title" id="flagCountModalLabel">
@@ -41,13 +26,39 @@ function FlagCountModal({ flags, adId }) {
           </div>
 
           <div className="modal-body">
-            {data &&
-              data.map((item) => (
-                <div key={item._id}>
-                  <p>{item.reason}</p>
-                  <p>{item.description}</p>
-                </div>
-              ))}
+            {displayReport &&
+              displayReport.map((item) => {
+                return (
+                  <div
+                    className="card"
+                    style={{ width: "29rem" }}
+                    key={item._id}
+                  >
+                    <div className="card-body">
+                      <h6 className="card-subtitle mb-2 text-muted">Reason:</h6>
+                      <p className="card-text" style={{ marginTop: "-11px" }}>
+                        {item.reason}
+                      </p>
+                      <h6 className="card-subtitle mb-2 text-muted">
+                        Description
+                      </h6>
+                      <p className="card-text" style={{ marginTop: "-11px" }}>
+                        {item.description}
+                      </p>
+                    </div>
+                  </div>
+                );
+              })}
+
+            <div className="card" style={{ width: "29rem" }}>
+              <div className="card-body">
+                <h6 className="card-subtitle mb-2 text-muted">Card subtitle</h6>
+                <p className="card-text">
+                  Some quick example text to build on the card title and make up
+                  the bulk of the card's content.
+                </p>
+              </div>
+            </div>
           </div>
           <div className="modal-footer">
             <button

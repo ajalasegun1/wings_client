@@ -6,10 +6,10 @@ import FilterRow from "./FilterRow";
 
 function HomeRight() {
   const [cars, setCars] = useState(null);
-  const [checker, setChecker] = useState(false)
+  const [checker, setChecker] = useState(false);
+  const [searchInput, setSearchInput] = useState(null);
 
   useEffect(() => {
-    console.log("I'm called")
     axios
       .get("/car")
       .then((result) => setCars(result.data.reverse()))
@@ -19,27 +19,26 @@ function HomeRight() {
   }, [checker]);
 
   useEffect(() => {
-    Pusher.logToConsole = true;
+    //Pusher.logToConsole = true;
     const pusher = new Pusher("8f1c1b41141be45abd07", {
       cluster: "eu",
     });
 
     const channel = pusher.subscribe("cars");
-    const channelFlags = pusher.subscribe("flags")
+    const channelFlags = pusher.subscribe("flags");
     channel.bind("inserted", function (data) {
       //alert(JSON.stringify(data));
       setCars([data, ...cars]);
-      setChecker(!checker)
+      setChecker(!checker);
     });
 
-    channel.bind("deleted", function (data){
-      setChecker(!checker)
-      console.log(data)
-    })
+    channel.bind("deleted", function (data) {
+      setChecker(!checker);
+    });
 
-    channelFlags.bind("inserted", function(data){
-      setChecker(!checker)
-    })
+    channelFlags.bind("inserted", function (data) {
+      setChecker(!checker);
+    });
 
     return () => {
       channel.unbind_all();
@@ -49,10 +48,13 @@ function HomeRight() {
     };
   }, [cars, checker]);
 
+  const getSearchInput = (data) => {
+    setSearchInput(data);
+  };
   return (
     <div className="home-right-container">
-      <FilterRow />
-      <HomeRightCard cars={cars} />
+      <FilterRow getSearchInput={getSearchInput} />
+      <HomeRightCard cars={cars} searchInput={searchInput} />
     </div>
   );
 }
