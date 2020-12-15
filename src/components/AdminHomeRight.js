@@ -1,17 +1,17 @@
 import React, { useState, useEffect } from "react";
-import HomeRightCard from "./HomeRightCard";
+import AdminHomeRightCard from "./AdminHomeRightCard";
 import axios from "axios";
 import Pusher from "pusher-js";
 import FilterRow from "./FilterRow";
 
-function HomeRight() {
+function AdminHomeRight() {
   const [cars, setCars] = useState(null);
   const [checker, setChecker] = useState(false);
   const [searchInput, setSearchInput] = useState(null);
 
   useEffect(() => {
     axios
-      .get("/car")
+      .get("/car/admin")
       .then((result) => setCars(result.data.reverse()))
       .catch((err) => {
         console.log(err.response);
@@ -58,9 +58,9 @@ function HomeRight() {
   return (
     <div className="home-right-container">
       <FilterRow getSearchInput={getSearchInput} />
-      <HomeRightCard cars={cars} searchInput={searchInput} />
+      <AdminHomeRightCard cars={cars} searchInput={searchInput} />
     </div>
   );
 }
 
-export default HomeRight;
+export default AdminHomeRight;

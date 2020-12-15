@@ -5,8 +5,10 @@ import axios from "axios";
 function HomeLeft() {
   const { centralUser } = useContext(AuthContext);
   let id = "";
+  let name = ""
   if (centralUser) {
     id = centralUser._id;
+    name = centralUser.first_name
   }
 
   const [post, setPost] = useState({
@@ -85,7 +87,7 @@ function HomeLeft() {
 
   return (
     <div className="row">
-      <h4>Welcome, Dummy!</h4>
+      <h4>Welcome, <strong>{name}</strong></h4>
 
       <div className="home-form-container">
         <form onSubmit={onSubmit}>

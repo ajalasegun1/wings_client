@@ -1,10 +1,9 @@
 import React, { useContext, useEffect } from "react";
-import "./Home.css";
 import HomeLeft from "./HomeLeft";
-import HomeRight from "./HomeRight";
+import AdminHomeRight from "./AdminHomeRight";
 import { AuthContext } from "../contexts/authContext";
 
-function Home(props) {
+function Admin(props) {
   const { isLoggedIn } = useContext(AuthContext);
   const displayPage = () => {
     return (
@@ -16,13 +15,13 @@ function Home(props) {
             </div>
           }
           <div className="col-8 home-right-column">
-            <HomeRight />
+            <AdminHomeRight />
           </div>
         </div>
       </div>
     );
   };
-  
+
   useEffect(() => {
     if (isLoggedIn === false) {
       props.history.push("/guest");
@@ -32,4 +31,4 @@ function Home(props) {
   return <div>{isLoggedIn === true && displayPage()}</div>;
 }
 
-export default Home;
+export default Admin;
