@@ -59,3 +59,7 @@ div.card{
 .pill-button:hover {
   cursor: pointer;
 }
+
+span.page-link.paginationHover:hover {
+  cursor: pointer;
+}

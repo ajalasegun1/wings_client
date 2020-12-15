@@ -12,7 +12,8 @@ function Signin(props) {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const { setCentralUser } = useContext(AuthContext);
+  const { setCentralUser, setIsLoggedIn } = useContext(AuthContext);
+  
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -21,13 +22,25 @@ function Signin(props) {
       .post("/auth/signin", user)
       .then((res) => {
         if (res.data.status === 200) {
+          console.log(res.data)
+          if(res.data.data.is_admin){
+            setIsLoggedIn(true)
+            setTimeout(()=> {
+              props.history.push("/admin")
+            }, 1000)
+          }else{
+            setIsLoggedIn(true)
+            setTimeout(()=> {
+              props.history.push("/")
+            }, 1000)
+          }
           setCentralUser(res.data.data);
           setSuccess(true)
           setError(null)
           setUser({email: "", password: ""})
-          setTimeout(()=> {
+          /*setTimeout(()=> {
             props.history.push("/")
-          }, 2000)
+          }, 1000)*/
         }
       })
       .catch((err) => {

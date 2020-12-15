@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect} from "react";
 import axios from "axios";
 import EditModal from "./modals/EditModal";
 import FlagModal from "./modals/FlagModal";
@@ -29,9 +29,6 @@ function HomeRightCard({ cars, searchInput }) {
         console.log(err);
       });
   };
-  if(searchInput && searchInput.length > 0){
-    console.log(searchInput)
-  }
   //get price
   const getPrice = (price, id) => {
     if (price) {
@@ -207,7 +204,9 @@ function HomeRightCard({ cars, searchInput }) {
         </div>
       </div>
 
-      {searchInput && searchInput.length > 0 ? loadCars(searchInput) : loadCars(cars)}
+      {searchInput && searchInput.length > 0
+        ? loadCars(searchInput)
+        : loadCars(cars)}
     </div>
   );
 }

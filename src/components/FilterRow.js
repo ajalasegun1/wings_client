@@ -5,7 +5,7 @@ function FilterRow({ getSearchInput}) {
   const [formdata, setFormData] = useState({
     min_price: "",
     max_price: "",
-    body_type: "",
+    manufacturer: "",
     state: "",
   });
   const [searchError, setSearchError] = useState(false)
@@ -16,12 +16,10 @@ function FilterRow({ getSearchInput}) {
   const onSubmit = (e) => {
     e.preventDefault();
     axios.post("/car/search", formdata).then(result => {
-      console.log(result.data)
       if(result.data.stringValue){
         setSearchError(true)
       }else{
         setSearchError(false)
-        console.log(result.data)
         getSearchInput(result.data)
       }
     })
@@ -56,11 +54,11 @@ function FilterRow({ getSearchInput}) {
           </div>
           <div className="form-group col-md-3">
             <input
-              placeholder="Body Type"
+              placeholder="Manufacturer"
               className="form-control "
-              name="body_type"
+              name="manufacturer"
               onChange={onChange}
-              value={formdata.body_type}
+              value={formdata.manufacturer}
             />
           </div>
           <div className="form-group col-md-2">

@@ -1,19 +1,23 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Navbar from "./components/Navbar";
-import Home from "./components/Home"
-import Signup from "./components/Signup"
-import Signin from "./components/Signin"
+import Home from "./components/Home";
+import Signup from "./components/Signup";
+import Signin from "./components/Signin";
+import Guest from "./components/Guest";
+
 
 function App() {
+  
   return (
     <div className="container">
       <Router>
         <Navbar />
         <Switch>
+          <Route path="/guest" component={Guest} />
           <Route exact path="/" component={Home} />
-          <Route  path="/signup" component={Signup} />
-          <Route  path="/signin" component={Signin} />
+          <Route path="/signup" component={Signup} />
+          <Route path="/signin" component={Signin} />
         </Switch>
       </Router>
     </div>
