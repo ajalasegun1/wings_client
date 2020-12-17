@@ -5,11 +5,10 @@ import Home from "./components/Home";
 import Signup from "./components/Signup";
 import Signin from "./components/Signin";
 import Guest from "./components/Guest";
-import Admin from "./components/Admin"
-
+import Admin from "./components/Admin";
+import OrderStatus from "./components/OrderStatus";
 
 function App() {
-  
   return (
     <div className="container">
       <Router>
@@ -20,6 +19,7 @@ function App() {
           <Route path="/admin" component={Admin} />
           <Route path="/signup" component={Signup} />
           <Route path="/signin" component={Signin} />
+          <Route path="/order-status" component={OrderStatus} />
         </Switch>
       </Router>
     </div>

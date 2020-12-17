@@ -1,13 +1,15 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import HomeRightCard from "./HomeRightCard";
 import axios from "axios";
 import Pusher from "pusher-js";
 import FilterRow from "./FilterRow";
+import {AuthContext} from "../contexts/authContext"
 
 function HomeRight() {
   const [cars, setCars] = useState(null);
   const [checker, setChecker] = useState(false);
   const [searchInput, setSearchInput] = useState(null);
+  const {centralUser} = useContext(AuthContext)
 
   useEffect(() => {
     axios
@@ -58,7 +60,7 @@ function HomeRight() {
   return (
     <div className="home-right-container">
       <FilterRow getSearchInput={getSearchInput} />
-      <HomeRightCard cars={cars} searchInput={searchInput} />
+      <HomeRightCard cars={cars} searchInput={searchInput} centralUser={centralUser}/>
     </div>
   );
 }

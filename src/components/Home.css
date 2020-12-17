@@ -63,3 +63,7 @@ div.card{
 span.page-link.paginationHover:hover {
   cursor: pointer;
 }
+
+.delHov {
+  cursor: pointer;
+}

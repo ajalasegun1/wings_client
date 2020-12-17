@@ -1,14 +1,18 @@
 import React, { useState, useContext } from "react";
 import { AuthContext } from "../contexts/authContext";
 import axios from "axios";
+import PurchaseaOrderModal from "./modals/PurchaseaOrderModal";
+import { Link } from "react-router-dom";
 
 function HomeLeft() {
   const { centralUser } = useContext(AuthContext);
   let id = "";
-  let name = ""
+  let name = "";
+  let owner = "";
   if (centralUser) {
     id = centralUser._id;
-    name = centralUser.first_name
+    name = centralUser.first_name;
+    owner = centralUser._id;
   }
 
   const [post, setPost] = useState({
@@ -87,7 +91,9 @@ function HomeLeft() {
 
   return (
     <div className="row">
-      <h4>Welcome, <strong>{name}</strong></h4>
+      <h4>
+        Welcome, <strong>{name}</strong>
+      </h4>
 
       <div className="home-form-container">
         <form onSubmit={onSubmit}>
@@ -168,9 +174,27 @@ function HomeLeft() {
       </div>
       {preview && <img width="200px" height="200px" src={preview} alt="test" />}
 
-      <div className="col-12 profile-actions">My Ads</div>
-      <div className="col-12 profile-actions">this is the second</div>
-      <div className="col-12 profile-actions">this is the third</div>
+      <div
+        className="col-12 profile-actions"
+        data-toggle="modal"
+        data-target="#purchaseOrderModal"
+      >
+        Purchase orders{" "}
+        <i className="fas fa-shopping-cart" style={{ marginLeft: "10px" }}></i>
+      </div>
+      <Link to="/order-status">
+        <div
+          className="col-12 profile-actions"
+        >
+          View order status{" "}
+          <i
+            className="fas fa-hourglass-half"
+            style={{ marginLeft: "10px" }}
+          ></i>
+        </div>
+      </Link>
+
+      <PurchaseaOrderModal owner={owner} />
     </div>
   );
 }
