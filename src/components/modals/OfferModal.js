@@ -13,7 +13,6 @@ function OfferModal({ owner, buyer, adId, carDetails, buyer_name }) {
 
   const onSubmit = (e) => {
     let price = Number(amount);
-    console.log(amount);
     let data = {
       owner,
       buyer,
@@ -30,6 +29,7 @@ function OfferModal({ owner, buyer, adId, carDetails, buyer_name }) {
         .post("/order", data)
         .then((res) => {
           setSuccess(true);
+          setAmount("");
           setTimeout(() => {
             setSuccess(false);
           }, 2000);
@@ -64,9 +64,6 @@ function OfferModal({ owner, buyer, adId, carDetails, buyer_name }) {
           </div>
           <div className="modal-body">
             <form onSubmit={onSubmit}>
-              <p>
-                Owner:{owner} Buyer:{buyer} AdId: {adId}
-              </p>
               {success && (
                 <div
                   className="alert alert-success alert-dismissible fade show"
